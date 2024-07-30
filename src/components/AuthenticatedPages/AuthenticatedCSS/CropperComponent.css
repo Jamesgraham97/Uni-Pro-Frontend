@@ -1,0 +1,22 @@
+.crop-container {
+    position: relative;
+    width: 100%;
+    height: 400px;
+    background: #333;
+  }
+  
+  .controls {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+  }
+  
+  .slider {
+    width: 300px;
+  }
+  
+  .crop-button {
+    margin-top: 20px;
+  }
+  

@@ -1,0 +1,34 @@
+.module-card {
+    height: 250px; /* Adjust the height as needed */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-color: #f8f9fa; /* Light grey background for the card */
+    border: 1px solid #ddd; /* Optional border */
+  }
+  
+  .create-button {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    background-color: transparent; /* Make the button background transparent */
+    border: 1px solid #ddd; /* Optional border to match the card */
+    color: #000; /* Black color for the plus icon */
+  }
+  
+  .create-button:hover {
+    background-color: #e9ecef; /* Slightly darker grey on hover */
+    color: #000; /* Keep the plus icon color black */
+  }
+  
+  .modal-content {
+    padding: 20px;
+  }
+  select.form-control option {
+    padding: 10px;
+  }

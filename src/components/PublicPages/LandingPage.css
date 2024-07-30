@@ -1,0 +1,80 @@
+/* Reset margins and padding for the body and html */
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow-x: hidden; /* Prevent horizontal scroll */
+}
+
+/* Full-screen header with background image */
+.custom-header {
+    background: url('/src/assets/LandingBG.jpg') no-repeat center center / cover;
+    height: 100vh; /* Full screen height */
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: #fff;
+    position: relative;
+    margin: 0;
+    padding: 0;
+    top: 0;
+    left: 0;
+}
+
+.custom-header h1 {
+    font-size: 3rem;
+    margin-bottom: 0.5rem;
+}
+
+.custom-header p {
+    font-size: 1.25rem;
+}
+
+.custom-header .btn {
+    margin-top: 1.5rem;
+}
+
+/* Navbar styles */
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 2000;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background for navbar */
+}
+
+/* Section styles */
+section {
+    padding: 4rem 0;
+}
+
+section h2 {
+    margin-bottom: 2rem;
+}
+
+.feature-image-wrapper {
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+footer {
+    background-color: #343a40;
+    color: #fff;
+    padding: 2rem 0;
+}
+
+footer a {
+    color: #fff;
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+/* Container with margin to accommodate fixed navbar */
+.container.mt-3 {
+    margin-top: calc(56px + 1rem); /* Adjust to ensure content starts after the navbar */
+}

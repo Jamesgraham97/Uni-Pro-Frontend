@@ -1,0 +1,138 @@
+.dashboard-container {
+  padding: 20px;
+}
+
+.modules-container {
+  margin-bottom: 40px;
+}
+
+.module-card {
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s;
+}
+
+.module-card:hover {
+  transform: translateY(-5px);
+}
+
+.assignments-calendar-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.assignments-container {
+  flex: 1;
+}
+
+.list-group-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #ffffff;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s;
+}
+
+.list-group-item:hover {
+  transform: translateY(-5px);
+}
+
+.calendar-container {
+  flex: 1;
+}
+
+.list-group-item h5 {
+  margin: 0;
+}
+
+.list-group-item p {
+  margin: 0;
+}
+/* Pastel colors */
+/* General Pastel Background */
+.pastel-bg {
+  background-color: #ffffff;
+}
+
+/* Calendar Tile Styles */
+.pastel-tile {
+  background-color: #e5eca2; /* Softer pastel color for better readability */
+  border: 1px solid #b2ebf2;
+  border-radius: 10px; /* Rounded corners for a bubblier look */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Light shadow for depth */
+  margin: 2px; /* Small margin between tiles */
+  transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for hover effect */
+}
+
+.pastel-tile:hover {
+  background-color: #b2ebf2; /* Slightly darker on hover */
+}
+
+.pastel-tile--active {
+  background-color: #80deea;
+}
+
+.pastel-tile--marked {
+  background-color: #80cbc4;
+  box-shadow: 0 0 10px rgba(233, 73, 33, 0.5); /* Glowing effect for marked dates */
+  position: relative; /* For positioning the flashing icon */
+}
+
+.pastel-tile--other-month {
+  background-color: #c0eca2; /* Different shade for tiles of other months */
+  border: 1px solid #aeeb85;
+}
+
+.pastel-tile-content {
+  color: #00796b;
+  font-weight: normal;
+}
+
+.pastel-tile-content ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.pastel-tile-content li {
+  color: #00796b;
+  font-size: 0.8em;
+  margin-top: 2px;
+}
+
+/* Flashing Icon */
+.flashing-icon {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #ff1744; /* Red color for the icon */
+  animation: flash 1s infinite; /* Flashing animation */
+}
+
+@keyframes flash {
+  0%, 50%, 100% {
+    opacity: 1;
+  }
+  25%, 75% {
+    opacity: 0;
+  }
+}
+
+/* General Styles for Featured Modules and Assignments */
+.card.module-card {
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.list-group-item {
+  border-left-width: 10px !important;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
