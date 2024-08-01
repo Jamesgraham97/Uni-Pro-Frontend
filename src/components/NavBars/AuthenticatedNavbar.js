@@ -60,6 +60,11 @@ const AuthenticatedNavbar = () => {
               <i className="bi bi-people-fill fs-1"></i>
             </Link>
           </li>
+          <li className="nav-item">
+            <Link to="/call" className="nav-link py-3 px-2 link-light" title="Video Chat" data-bs-toggle="tooltip" data-bs-placement="right">
+              <i className="bi bi-camera-video fs-1"></i>
+            </Link>
+          </li>
           <NotificationButton />
           <SearchButton />
         </ul>

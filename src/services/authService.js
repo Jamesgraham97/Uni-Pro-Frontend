@@ -1,8 +1,12 @@
 import axios from 'axios';
 import {jwtDecode} from 'jwt-decode';
+import io from 'socket.io-client';
 
 const API_URL = 'http://localhost:3000';
 const API_V1_URL = `${API_URL}/api/v1`;
+
+let socket;
+
 
 const register = async (email, password, displayName) => {
   const response = await axios.post(`${API_URL}/users`, {
@@ -58,12 +62,24 @@ const fetchUsers = async () => {
     return response.data;
   };
 
+  const connectToWebSocket = (userId) => {
+    socket = io.connect('http://localhost:8080', {
+      query: { userId },
+    });
+  
+    socket.on('call-user', ({ from, signal, display_name }) => {
+      // Handle incoming call notification
+      console.log('Received call from:', from);
+      // Show a notification or redirect to the video call page
+    });
+  };
 const authService = {
   register,
   login,
   logout,
   getCurrentUser,
-  fetchUsers
+  fetchUsers,
+  connectToWebSocket
 };
 
 export default authService;

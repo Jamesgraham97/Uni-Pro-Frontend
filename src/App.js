@@ -1,6 +1,8 @@
+// src/App.js
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
+import { WebSocketProvider } from './context/WebSocketProvider';
 import { NotificationProvider } from './components/AuthenticatedPages/NotificationContext';
 import PrivateRoute from './components/PrivateRoute';
 import LandingPage from './components/PublicPages/LandingPage';
@@ -15,9 +17,11 @@ import Modules from './components/AuthenticatedPages/Modules';
 import Assignments from './components/AuthenticatedPages/Assignments';
 import Kanban from './components/AuthenticatedPages/Kanban';
 import Profile from './components/AuthenticatedPages/Profile';
-import Teams from './components/AuthenticatedPages/Teams'; // Import Teams component
-import Projects from './components/AuthenticatedPages/Projects'; // Import Projects component
-import ProjectDetails from './components/AuthenticatedPages/ProjectDetails'; // Import ProjectDetails component
+import Teams from './components/AuthenticatedPages/Teams';
+import Projects from './components/AuthenticatedPages/Projects';
+import ProjectDetails from './components/AuthenticatedPages/ProjectDetails';
+import CallPage from './components/AuthenticatedPages/CallPage';
+import VideoCall from './components/AuthenticatedPages/VideoCall';
 
 const App = () => {
   return (
@@ -34,13 +38,17 @@ const App = () => {
           </Route>
 
           {/* Authenticated Routes */}
-          <Route element={
-            <PrivateRoute>
-              <NotificationProvider>
-                <AuthenticatedLayout />
-              </NotificationProvider>
-            </PrivateRoute>
-          }>
+          <Route
+            element={
+              <PrivateRoute>
+                <WebSocketProvider>
+                  <NotificationProvider>
+                    <AuthenticatedLayout />
+                  </NotificationProvider>
+                </WebSocketProvider>
+              </PrivateRoute>
+            }
+          >
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/modules" element={<Modules />} />
             <Route path="/assignments" element={<Assignments />} />
@@ -49,6 +57,8 @@ const App = () => {
             <Route path="/teams" element={<Teams />} />
             <Route path="/teams/:teamId/projects" element={<Projects />} />
             <Route path="/teams/:teamId/projects/:projectId" element={<ProjectDetails />} />
+            <Route path="/call" element={<CallPage />} />
+            <Route path="/video-call/:friendId" element={<VideoCall />} />
           </Route>
         </Routes>
       </Router>
