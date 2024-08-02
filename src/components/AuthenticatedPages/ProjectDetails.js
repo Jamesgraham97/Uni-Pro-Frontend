@@ -5,6 +5,7 @@ import { FaEdit } from 'react-icons/fa';
 import { MdDelete } from 'react-icons/md';
 import { LuGrab } from 'react-icons/lu';
 import ApiService from '../../services/api';
+import API_URL from '../../config/config';
 
 const ProjectDetails = () => {
   const { teamId, projectId } = useParams();
@@ -218,7 +219,7 @@ const ProjectDetails = () => {
                   <div className="d-flex align-items-center">
                     {projectAssignment.user.profile_picture_url && (
                       <Image
-                        src={`http://localhost:3000${projectAssignment.user.profile_picture_url}`}
+                        src={`${API_URL}${projectAssignment.user.profile_picture_url}`}
                         roundedCircle
                         className="me-2"
                         style={{ width: '40px', height: '40px' }}

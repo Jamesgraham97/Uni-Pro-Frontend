@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import ApiService from '../../services/api';
 import CropperComponent from './CropperComponent';
 import './AuthenticatedCSS/Profile.css';
+import API_URL from '../../config/config';
 
 
 const Profile = () => {
@@ -170,7 +171,7 @@ const Profile = () => {
       <div className="mt-4">
         <h3>Current Profile Picture</h3>
         {user.profile_picture_url && (
-          <img src={`http://localhost:3000${user.profile_picture_url}`} alt="Profile" className="profile-picture" />
+          <img src={`${API_URL}${user.profile_picture_url}`} alt="Profile" className="profile-picture" />
         )}
       </div>
     </div>

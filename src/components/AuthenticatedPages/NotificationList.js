@@ -2,6 +2,8 @@ import React, { useContext } from 'react';
 import { NotificationContext } from '../AuthenticatedPages/NotificationContext';
 import { Button, Modal } from 'react-bootstrap';
 import './AuthenticatedCSS/NotificationList.css';
+import API_URL from '../../config/config';
+
 
 const NotificationList = ({ showModal, handleCloseModal }) => {
   const { notifications, markAsRead, respondToFriendRequest, respondToTeamInvite } = useContext(NotificationContext);
@@ -20,7 +22,7 @@ const NotificationList = ({ showModal, handleCloseModal }) => {
             {notification.notification_type === 'friend_request' && notification.friend_request && notification.friend_request.user ? (
               <>
                 <img
-                  src={`http://localhost:3000${notification.friend_request.user.profile_picture_url}`}
+                  src={`${API_URL}${notification.friend_request.user.profile_picture_url}`}
                   alt="Profile"
                   className="img-fluid rounded-circle me-3"
                   style={{ width: '50px', height: '50px', objectFit: 'cover' }}

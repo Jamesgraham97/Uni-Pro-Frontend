@@ -5,6 +5,7 @@ import AuthService from '../../services/api';
 import './AuthenticatedNavbar.css';
 import NotificationButton from './NotificationButton';
 import SearchButton from './SearchButton';
+import API_URL from '../../config/config';
 
 const AuthenticatedNavbar = () => {
   const { logout } = useAuth();
@@ -72,7 +73,7 @@ const AuthenticatedNavbar = () => {
           <button className="d-flex align-items-center justify-content-center p-3 link-light text-decoration-none dropdown-toggle" id="dropdownUser3" data-bs-toggle="dropdown" aria-expanded="false" style={{ border: 'none', padding: 0, background: 'none' }}>
             {currentUser && currentUser.user.profile_picture_url ? (
               <img
-                src={`http://localhost:3000${currentUser.user.profile_picture_url}`}
+                src={`${API_URL}${currentUser.user.profile_picture_url}`}
                 alt="Profile"
                 className="img-fluid"
                 style={{ borderRadius: '50%', width: '40px', height: '40px', objectFit: 'cover' }}

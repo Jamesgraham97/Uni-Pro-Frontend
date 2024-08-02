@@ -1,7 +1,8 @@
 import axios from 'axios';
 import authService from './authService';
 
-const API_URL = 'http://localhost:3000';
+import API_URL from '../config/config.js';
+
 const API_V1_URL = `${API_URL}/api/v1`;
 
 const fetchAssignments = async (projectId) => {

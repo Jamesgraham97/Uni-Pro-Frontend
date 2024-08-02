@@ -2,7 +2,7 @@ import axios from 'axios';
 import {jwtDecode} from 'jwt-decode';
 import io from 'socket.io-client';
 
-const API_URL = 'http://localhost:3000';
+import API_URL from '../config/config.js';
 const API_V1_URL = `${API_URL}/api/v1`;
 
 let socket;

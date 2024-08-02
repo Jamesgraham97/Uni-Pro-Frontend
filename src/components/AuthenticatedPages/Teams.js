@@ -6,6 +6,7 @@ import { useAuth } from '../../context/AuthContext';
 import ApiService from '../../services/api';
 import { FaEdit } from 'react-icons/fa';
 import { MdDelete } from 'react-icons/md';
+import API_URL from '../../config/config';
 
 const Teams = () => {
   const { user } = useAuth();
@@ -130,7 +131,7 @@ const Teams = () => {
               {team.team_members && team.team_members.map(team_member => (
                 <img
                   key={team_member.user.id}
-                  src={`http://localhost:3000${team_member.user.profile_picture_url}`}
+                  src={`${API_URL}${team_member.user.profile_picture_url}`}
                   alt={team_member.user.display_name}
                   title={team_member.user.display_name}
                   className="rounded-circle"

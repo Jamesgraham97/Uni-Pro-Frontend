@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import AuthService from '../../services/api';
 import { Modal, Button } from 'react-bootstrap';
+import API_URL from '../../config/config';
 
 const SearchButton = () => {
   const [showSearchModal, setShowSearchModal] = useState(false);
@@ -128,7 +129,7 @@ const SearchButton = () => {
           <div className="d-flex flex-column align-items-center">
             {selectedUser?.profile_picture_url ? (
               <img
-                src={`http://localhost:3000${selectedUser.profile_picture_url}`}
+                src={`${API_URL}${selectedUser.profile_picture_url}`}
                 alt="Profile"
                 className="img-fluid img-thumbnail mb-3 profile-picture"
               />

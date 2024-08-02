@@ -7,7 +7,7 @@ class WebSocketManager {
 
   connect(userId) {
     if (!this.socket || !this.socket.connected) {
-      this.socket = io('http://localhost:8080', {
+      this.socket = io('http://ec2-44-204-147-65.compute-1.amazonaws.com:8080', {
         query: { userId },
         transports: ['websocket', 'polling'], // Ensure both transports are allowed
       });
