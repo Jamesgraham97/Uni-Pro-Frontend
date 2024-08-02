@@ -1,18 +1,18 @@
 {
   "files": {
-    "main.css": "/Jamesgraham97/Uni-Pro-Frontend/static/css/main.53f1db71.css",
-    "main.js": "/Jamesgraham97/Uni-Pro-Frontend/static/js/main.4bfaf77b.js",
-    "static/js/453.f8340e1a.chunk.js": "/Jamesgraham97/Uni-Pro-Frontend/static/js/453.f8340e1a.chunk.js",
-    "static/media/LandingBG.jpg": "/Jamesgraham97/Uni-Pro-Frontend/static/media/LandingBG.1c7fee4ff9021357822d.jpg",
-    "static/media/bootstrap-icons.woff?": "/Jamesgraham97/Uni-Pro-Frontend/static/media/bootstrap-icons.39795c0b4513de014cf8.woff",
-    "static/media/bootstrap-icons.woff2?": "/Jamesgraham97/Uni-Pro-Frontend/static/media/bootstrap-icons.b7bcc075b395c14ce8c2.woff2",
-    "index.html": "/Jamesgraham97/Uni-Pro-Frontend/index.html",
-    "main.53f1db71.css.map": "/Jamesgraham97/Uni-Pro-Frontend/static/css/main.53f1db71.css.map",
-    "main.4bfaf77b.js.map": "/Jamesgraham97/Uni-Pro-Frontend/static/js/main.4bfaf77b.js.map",
-    "453.f8340e1a.chunk.js.map": "/Jamesgraham97/Uni-Pro-Frontend/static/js/453.f8340e1a.chunk.js.map"
+    "main.css": "/Uni-Pro-Frontend/static/css/main.6f8c0965.css",
+    "main.js": "/Uni-Pro-Frontend/static/js/main.7c24c08f.js",
+    "static/js/453.f8340e1a.chunk.js": "/Uni-Pro-Frontend/static/js/453.f8340e1a.chunk.js",
+    "static/media/LandingBG.jpg": "/Uni-Pro-Frontend/static/media/LandingBG.1c7fee4ff9021357822d.jpg",
+    "static/media/bootstrap-icons.woff?": "/Uni-Pro-Frontend/static/media/bootstrap-icons.39795c0b4513de014cf8.woff",
+    "static/media/bootstrap-icons.woff2?": "/Uni-Pro-Frontend/static/media/bootstrap-icons.b7bcc075b395c14ce8c2.woff2",
+    "index.html": "/Uni-Pro-Frontend/index.html",
+    "main.6f8c0965.css.map": "/Uni-Pro-Frontend/static/css/main.6f8c0965.css.map",
+    "main.7c24c08f.js.map": "/Uni-Pro-Frontend/static/js/main.7c24c08f.js.map",
+    "453.f8340e1a.chunk.js.map": "/Uni-Pro-Frontend/static/js/453.f8340e1a.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.53f1db71.css",
-    "static/js/main.4bfaf77b.js"
+    "static/css/main.6f8c0965.css",
+    "static/js/main.7c24c08f.js"
   ]
 }
