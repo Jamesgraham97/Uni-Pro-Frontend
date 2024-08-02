@@ -26,7 +26,7 @@ import VideoCall from './components/AuthenticatedPages/VideoCall';
 const App = () => {
   return (
     <AuthProvider>
-      <Router>
+      <Router basename="/Uni-Pro-Frontend">
         <Routes>
           {/* Public Routes */}
           <Route element={<PublicLayout />}>

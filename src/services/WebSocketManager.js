@@ -7,9 +7,10 @@ class WebSocketManager {
 
   connect(userId) {
     if (!this.socket || !this.socket.connected) {
-      this.socket = io('http://ec2-44-204-147-65.compute-1.amazonaws.com:8080', {
+      this.socket = io('https://unipro.hopto.org/signaling', {
         query: { userId },
-        transports: ['websocket', 'polling'], // Ensure both transports are allowed
+        transports: ['websocket', 'polling'],
+        path: '/signaling'
       });
 
       this.socket.on('connect', () => {
@@ -33,6 +34,8 @@ class WebSocketManager {
 
   disconnect() {
     if (this.socket) {
+      this.socket.off('call-user');
+      this.socket.off('call-accepted');
       this.socket.disconnect();
       this.socket = null;
     }

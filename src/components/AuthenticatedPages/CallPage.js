@@ -100,16 +100,21 @@ const CallPage = () => {
   return (
     <div className="container mt-5">
       <h1>Call Page</h1>
-      <ul className="list-group">
-        {friends.map(friend => (
-          <li key={friend.id} className="list-group-item d-flex justify-content-between align-items-center">
-            <span>{friend.display_name || friend.name}</span>
-            <button className="btn btn-primary" onClick={() => handleCall(friend.id)}>
-              <FcVideoCall size={24} />
-            </button>
-          </li>
-        ))}
-      </ul>
+      <h2>Friend List</h2>
+      {friends.length === 0 ? (
+        <p>No current friends, add friends now.</p>
+      ) : (
+        <ul className="list-group">
+          {friends.map(friend => (
+            <li key={friend.id} className="list-group-item d-flex justify-content-between align-items-center">
+              <span>{friend.display_name || friend.name}</span>
+              <button className="btn btn-primary" onClick={() => handleCall(friend.id)}>
+                <FcVideoCall size={24} />
+              </button>
+            </li>
+          ))}
+        </ul>
+      )}
       {calling && <p className="mt-3">Calling...</p>}
     </div>
   );

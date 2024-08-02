@@ -43,20 +43,20 @@ export const WebSocketProvider = ({ children }) => {
         console.log('Incoming call from:', data.from);
         setIncomingCall(data);
       });
-
+  
       socket.on('call-accepted', ({ signal, from }) => {
         console.log('Call accepted by:', from);
         navigate(`/video-call/${from}`);
       });
-
+  
       socket.on('connect_error', (error) => {
         console.error('Connection error:', error);
       });
-
+  
       socket.on('error', (error) => {
         console.error('WebSocket error:', error);
       });
-
+  
       return () => {
         socket.off('call-user');
         socket.off('call-accepted');

@@ -46,14 +46,14 @@ const LandingPage = () => (
         <div className="row">
           <div className="col-md-6">
             <div className="feature-image-wrapper">
-              <img src="/kanban.jpg" className="img-fluid mb-3" alt="Kanban Boards" />
+              <img src="/src/assets/kanban.jpg" className="img-fluid mb-3" alt="Kanban Boards" />
             </div>
             <h3>Kanban Boards</h3>
             <p>Organize your tasks and projects using interactive Kanban boards.</p>
           </div>
           <div className="col-md-6">
             <div className="feature-image-wrapper">
-              <img src="/RealTime.jpg" className="img-fluid mb-3" alt="Real-Time Collaboration" />
+              <img src="/src/assets/RealTime.jpg" className="img-fluid mb-3" alt="Real-Time Collaboration" />
             </div>
             <h3>Real-Time Collaboration</h3>
             <p>Collaborate in real-time with your team and keep everyone on the same page.</p>
