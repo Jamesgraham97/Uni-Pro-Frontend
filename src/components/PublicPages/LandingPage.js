@@ -4,6 +4,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import './LandingPage.css';  // Custom CSS for additional styling
 
+import kanbanImage from '../../assets/kanban.jpg';
+import realTimeImage from '../../assets/RealTime.jpg';
+
 const LandingPage = () => (
   <>
     <header className="custom-header text-white text-center py-5">
@@ -46,14 +49,14 @@ const LandingPage = () => (
         <div className="row">
           <div className="col-md-6">
             <div className="feature-image-wrapper">
-              <img src="/src/assets/kanban.jpg" className="img-fluid mb-3" alt="Kanban Boards" />
+              <img src= {kanbanImage} className="img-fluid mb-3" alt="Kanban Boards" />
             </div>
             <h3>Kanban Boards</h3>
             <p>Organize your tasks and projects using interactive Kanban boards.</p>
           </div>
           <div className="col-md-6">
             <div className="feature-image-wrapper">
-              <img src="/src/assets/RealTime.jpg" className="img-fluid mb-3" alt="Real-Time Collaboration" />
+              <img src= {realTimeImage} className="img-fluid mb-3" alt="Real-Time Collaboration" />
             </div>
             <h3>Real-Time Collaboration</h3>
             <p>Collaborate in real-time with your team and keep everyone on the same page.</p>
