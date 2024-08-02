@@ -1,18 +1,18 @@
 {
   "files": {
     "main.css": "/Uni-Pro-Frontend/static/css/main.6f8c0965.css",
-    "main.js": "/Uni-Pro-Frontend/static/js/main.7d7968f9.js",
+    "main.js": "/Uni-Pro-Frontend/static/js/main.3bad5baf.js",
     "static/js/453.f8340e1a.chunk.js": "/Uni-Pro-Frontend/static/js/453.f8340e1a.chunk.js",
     "static/media/LandingBG.jpg": "/Uni-Pro-Frontend/static/media/LandingBG.1c7fee4ff9021357822d.jpg",
     "static/media/bootstrap-icons.woff?": "/Uni-Pro-Frontend/static/media/bootstrap-icons.39795c0b4513de014cf8.woff",
     "static/media/bootstrap-icons.woff2?": "/Uni-Pro-Frontend/static/media/bootstrap-icons.b7bcc075b395c14ce8c2.woff2",
     "index.html": "/Uni-Pro-Frontend/index.html",
     "main.6f8c0965.css.map": "/Uni-Pro-Frontend/static/css/main.6f8c0965.css.map",
-    "main.7d7968f9.js.map": "/Uni-Pro-Frontend/static/js/main.7d7968f9.js.map",
+    "main.3bad5baf.js.map": "/Uni-Pro-Frontend/static/js/main.3bad5baf.js.map",
     "453.f8340e1a.chunk.js.map": "/Uni-Pro-Frontend/static/js/453.f8340e1a.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.6f8c0965.css",
-    "static/js/main.7d7968f9.js"
+    "static/js/main.3bad5baf.js"
   ]
 }

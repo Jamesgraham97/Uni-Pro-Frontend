@@ -1,8 +1,17 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <meta http-equiv="refresh" content="0; URL=./index.html" />
-</head>
-<body>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="refresh" content="0; URL=./index.html" />
+    <script>
+      // This script will ensure that the current path is maintained on refresh
+      (function () {
+        const redirectTo = location.pathname.replace('/Uni-Pro-Frontend', '');
+        if (redirectTo) {
+          window.location.href = './index.html#' + redirectTo;
+        }
+      })();
+    </script>
+  </head>
+  <body></body>
 </html>
