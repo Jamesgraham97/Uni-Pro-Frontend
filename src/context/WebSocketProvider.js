@@ -65,6 +65,7 @@ export const WebSocketProvider = ({ children }) => {
       };
     }
   }, [socket, navigate]);
+  
 
   const acceptCall = () => {
     if (incomingCall) {
@@ -72,7 +73,7 @@ export const WebSocketProvider = ({ children }) => {
         socket.emit('accept-call', {
           to: incomingCall.from,
           from: user.user.id,
-          signal: incomingCall.signal
+          signal: incomingCall.signal 
         });
         setIncomingCall(null); // clear the incoming call
         navigate(`/video-call/${incomingCall.from}`);

@@ -53,22 +53,22 @@ const CallPage = () => {
       console.log('Socket is not initialized yet.');
       return;
     }
-
+  
     setCalling(true);
-
+  
     const peerConnection = new RTCPeerConnection({
       iceServers: [
         { urls: 'stun:stun.l.google.com:19302' }
       ]
     });
     peerConnectionRef.current = peerConnection;
-
+  
     const stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
     stream.getTracks().forEach(track => peerConnection.addTrack(track, stream));
-
+  
     const offer = await peerConnection.createOffer();
     await peerConnection.setLocalDescription(offer);
-
+  
     socket.emit('call-user', { 
       to: friendId, 
       from: user.user.id, 
@@ -76,18 +76,18 @@ const CallPage = () => {
       display_name: user.user.display_name || user.user.email // Add display_name or email
     });
     console.log(`Call emitted to friend with ID: ${friendId}`);
-
+  
     peerConnection.onicecandidate = event => {
       if (event.candidate) {
         socket.emit('ice-candidate', { to: friendId, from: user.user.id, candidate: event.candidate });
         console.log(`ICE candidate sent to ${friendId}`);
       }
     };
-
+  
     peerConnection.ontrack = event => {
       console.log('Remote track received', event.streams[0]);
     };
-
+  
     socket.on('ice-candidate', ({ candidate, from }) => {
       if (candidate && peerConnection.signalingState !== 'closed') {
         peerConnection.addIceCandidate(new RTCIceCandidate(candidate))
@@ -96,6 +96,7 @@ const CallPage = () => {
       }
     });
   }, [isConnected, socket, user]);
+  
 
   return (
     <div className="container mt-5">
