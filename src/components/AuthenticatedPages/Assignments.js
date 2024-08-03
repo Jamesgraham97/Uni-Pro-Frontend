@@ -28,7 +28,6 @@ const Assignments = () => {
     course_module_id: '',
     parent_id: null,
   });
-  
 
   useEffect(() => {
     const loadAssignments = async () => {
@@ -56,7 +55,6 @@ const Assignments = () => {
     const { name, value } = e.target;
     setNewAssignment((prev) => ({ ...prev, [name]: value }));
   };
-
 
   const handleDateChange = (date, field) => {
     setNewAssignment((prev) => ({ ...prev, [field]: date }));
@@ -114,6 +112,7 @@ const Assignments = () => {
         await ApiService.deleteAssignment(id);
         setAssignments((prev) => prev.filter((assignment) => assignment.id !== id));
         setDeleting(null); // Reset deleting state
+        setShowDetails(false); // Close the modal if it's open
       } catch (error) {
         setError('Error deleting assignment');
         setDeleting(null); // Reset deleting state even if there's an error
@@ -143,8 +142,6 @@ const Assignments = () => {
     setShowForm(true);
   };
 
- 
-
   if (loading) {
     return <div className="spinner"><Spinner animation="border" role="status"><span className="sr-only">Loading...</span></Spinner></div>;
   }
@@ -165,10 +162,11 @@ const Assignments = () => {
         <Modal.Body>
           <Form onSubmit={isEditing ? handleUpdate : handleCreate}>
             <Form.Group>
-              <Form.Label>Title</Form.Label>
+              <Form.Label htmlFor="title">Title</Form.Label>
               <Form.Control
                 type="text"
                 name="title"
+                id="title"
                 value={newAssignment.title}
                 onChange={handleChange}
                 placeholder="Title"
@@ -176,10 +174,11 @@ const Assignments = () => {
               />
             </Form.Group>
             <Form.Group>
-              <Form.Label>Description</Form.Label>
+              <Form.Label htmlFor="description">Description</Form.Label>
               <Form.Control
                 type="text"
                 name="description"
+                id="description"
                 value={newAssignment.description}
                 onChange={handleChange}
                 placeholder="Description"
@@ -187,28 +186,31 @@ const Assignments = () => {
               />
             </Form.Group>
             <Form.Group>
-              <Form.Label>Due Date</Form.Label>
+              <Form.Label htmlFor="due_date">Due Date</Form.Label>
               <DatePicker
                 selected={newAssignment.due_date}
                 onChange={(date) => handleDateChange(date, 'due_date')}
                 className="form-control"
+                id="due_date"
                 dateFormat="yyyy-MM-dd"
               />
             </Form.Group>
             <Form.Group>
-              <Form.Label>Given Date</Form.Label>
+              <Form.Label htmlFor="given_date">Given Date</Form.Label>
               <DatePicker
                 selected={newAssignment.given_date}
                 onChange={(date) => handleDateChange(date, 'given_date')}
                 className="form-control"
+                id="given_date"
                 dateFormat="yyyy-MM-dd"
               />
             </Form.Group>
             <Form.Group>
-              <Form.Label>Status</Form.Label>
+              <Form.Label htmlFor="status">Status</Form.Label>
               <Form.Control
                 as="select"
                 name="status"
+                id="status"
                 value={newAssignment.status}
                 onChange={handleChange}
                 required
@@ -219,10 +221,11 @@ const Assignments = () => {
               </Form.Control>
             </Form.Group>
             <Form.Group>
-              <Form.Label>Priority</Form.Label>
+              <Form.Label htmlFor="priority">Priority</Form.Label>
               <Form.Control
                 as="select"
                 name="priority"
+                id="priority"
                 value={newAssignment.priority}
                 onChange={handleChange}
                 required
@@ -234,10 +237,11 @@ const Assignments = () => {
               </Form.Control>
             </Form.Group>
             <Form.Group>
-              <Form.Label>Grade Weight</Form.Label>
+              <Form.Label htmlFor="grade_weight">Grade Weight</Form.Label>
               <Form.Control
                 type="number"
                 name="grade_weight"
+                id="grade_weight"
                 value={newAssignment.grade_weight}
                 onChange={handleChange}
                 placeholder="Grade Weight"
@@ -245,10 +249,11 @@ const Assignments = () => {
               />
             </Form.Group>
             <Form.Group>
-              <Form.Label>Course Module</Form.Label>
+              <Form.Label htmlFor="course_module_id">Course Module</Form.Label>
               <Form.Control
                 as="select"
                 name="course_module_id"
+                id="course_module_id"
                 value={newAssignment.course_module_id}
                 onChange={handleChange}
                 required
@@ -268,7 +273,7 @@ const Assignments = () => {
 
       <ListGroup className="mt-4">
         {assignments && assignments.filter(a => !a.parent_id).map((assignment) => (
-          <ListGroup.Item key={assignment.id} action onClick={() => handleAssignmentClick(assignment)} className={deleting === assignment.id ? 'deleting' : ''} style={{ backgroundColor: getModuleColor(assignment.course_module_id) }}>
+          <ListGroup.Item as="div" key={assignment.id} action onClick={() => handleAssignmentClick(assignment)} className={deleting === assignment.id ? 'deleting' : ''} style={{ backgroundColor: getModuleColor(assignment.course_module_id) }}>
           <Row>
             <Col md={8}>
               <h5>{assignment.title}</h5>
@@ -276,10 +281,10 @@ const Assignments = () => {
               <p>Priority: {assignment.priority}</p>
             </Col>
             <Col md={4} className="text-right">
-              <Button variant="link" className="icon-button edit-button" onClick={(e) => { e.stopPropagation(); handleEditClick(assignment); }}>
+              <Button variant="link" className="icon-button edit-button" aria-label="edit" onClick={(e) => { e.stopPropagation(); handleEditClick(assignment); }}>
                 <FaEdit />
               </Button>
-              <Button variant="link" className="icon-button delete-button" onClick={(e) => { e.stopPropagation(); handleDelete(assignment.id); }}>
+              <Button variant="link" className="icon-button delete-button" aria-label="delete" onClick={(e) => { e.stopPropagation(); handleDelete(assignment.id); }}>
                 <MdDelete />
               </Button>
             </Col>

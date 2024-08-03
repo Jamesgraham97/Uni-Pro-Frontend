@@ -9,8 +9,6 @@
     "@emotion/styled": "^11.13.0",
     "@mui/material": "^5.16.4",
     "@rails/actioncable": "^7.1.3-4",
-    "@testing-library/jest-dom": "^5.17.0",
-    "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.7.2",
     "bootstrap": "^5.3.3",
@@ -63,8 +61,28 @@
   },
   "homepage": "https://Jamesgraham97.github.io/Uni-Pro-Frontend",
   "devDependencies": {
+    "@babel/core": "^7.25.2",
+    "@babel/plugin-proposal-private-property-in-object": "^7.19.0",
+    "@babel/preset-env": "^7.25.3",
+    "@babel/preset-react": "^7.24.7",
+    "@cypress/react18": "^2.0.1",
+    "@cypress/webpack-dev-server": "^3.10.1",
+    "@testing-library/jest-dom": "^6.4.8",
+    "@testing-library/react": "^16.0.0",
+    "babel-jest": "^29.7.0",
     "cross-env": "^7.0.3",
     "gh-pages": "^6.1.1",
-    "@babel/plugin-proposal-private-property-in-object": "^7.19.0"
+    "jest-canvas-mock": "^2.5.2"
+  },
+  "jest": {
+    "transform": {
+      "^.+\\.jsx?$": "babel-jest"
+    },
+    "transformIgnorePatterns": [
+      "/node_modules/(?!axios)/"
+    ],
+    "moduleNameMapper": {
+      "^bootstrap$": "<rootDir>/__mocks__/bootstrap.js"
+    }
   }
 }

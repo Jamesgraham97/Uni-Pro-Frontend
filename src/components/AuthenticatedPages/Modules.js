@@ -17,6 +17,7 @@ const Modules = () => {
   const [modules, setModules] = useState([]);
   const [newModule, setNewModule] = useState({ name: '', description: '', color: pastelColors[0] });
   const [currentModule, setCurrentModule] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false); // New state for modal visibility
 
   useEffect(() => {
     const fetchData = async () => {
@@ -41,6 +42,7 @@ const Modules = () => {
       const createdModule = await ApiService.createModule({ course_module: newModule });
       setModules((prevModules) => [...prevModules, createdModule]);
       setNewModule({ name: '', description: '', color: pastelColors[0] });
+      setIsModalOpen(false); // Close modal after submit
     } catch (error) {
       console.error('Error creating module:', error);
     }
@@ -58,8 +60,7 @@ const Modules = () => {
   const handleEdit = (module) => {
     setCurrentModule(module);
     setNewModule(module);
-    const modal = new window.bootstrap.Modal(document.getElementById('createModuleModal'));
-    modal.show();
+    setIsModalOpen(true); // Open modal for edit
   };
 
   const handleUpdate = async (e) => {
@@ -69,6 +70,7 @@ const Modules = () => {
       setModules(modules.map((module) => (module.id === updatedModule.id ? updatedModule : module)));
       setNewModule({ name: '', description: '', color: pastelColors[0] });
       setCurrentModule(null);
+      setIsModalOpen(false); // Close modal after update
     } catch (error) {
       console.error('Error updating module:', error);
     }
@@ -87,17 +89,25 @@ const Modules = () => {
               </div>
             </div>
             <div className="dropdown text-center mt-2">
-              <button className="btn btn-secondary dropdown-toggle" type="button" id={`dropdownMenuButton-${module.id}`} data-bs-toggle="dropdown" aria-expanded="false">
+              <button
+                className="btn btn-secondary dropdown-toggle"
+                type="button"
+                id={`dropdownMenuButton-${module.id}`}
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+                aria-label={`Options for ${module.name}`}
+                data-testid={`dropdown-button-${module.id}`} // Add this line
+              >
                 ...
               </button>
               <ul className="dropdown-menu" aria-labelledby={`dropdownMenuButton-${module.id}`}>
                 <li>
-                  <button className="dropdown-item" onClick={() => handleEdit(module)}>
+                  <button className="dropdown-item" aria-label={`Edit ${module.name}`} onClick={() => handleEdit(module)}>
                     Edit
                   </button>
                 </li>
                 <li>
-                  <button className="dropdown-item" onClick={() => handleDelete(module.id)}>
+                  <button className="dropdown-item" aria-label={`Delete ${module.name}`} onClick={() => handleDelete(module.id)}>
                     Delete
                   </button>
                 </li>
@@ -106,75 +116,73 @@ const Modules = () => {
           </div>
         ))}
         <div className="col-md-4 mb-4">
-          <button 
-            className="btn btn-primary module-card create-button" 
-            data-bs-toggle="modal" 
-            data-bs-target="#createModuleModal"
+          <button
+            className="btn btn-primary module-card create-button"
+            onClick={() => setIsModalOpen(true)} // Open modal on create button click
+            aria-label="Create New Module"
           >
-            <i className="bi bi-plus-lg"></i>
+            <i className="bi bi-plus-lg"></i> Create New Module
           </button>
         </div>
       </div>
 
-      <div className="modal fade" id="createModuleModal" tabIndex="-1" aria-labelledby="createModuleModalLabel" aria-hidden="true">
-        <div className="modal-dialog">
-          <div className="modal-content">
-            <div className="modal-header">
-              <h5 className="modal-title" id="createModuleModalLabel">
-                {currentModule ? 'Edit Module' : 'Create New Module'}
-              </h5>
-              <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div className="modal-body">
-              <form onSubmit={currentModule ? handleUpdate : handleSubmit}>
-                <div className="mb-3">
-                  <label htmlFor="name" className="form-label">Module Name</label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    id="name"
-                    name="name"
-                    value={newModule.name}
-                    onChange={handleInputChange}
-                    required
-                  />
-                </div>
-                <div className="mb-3">
-                  <label htmlFor="description" className="form-label">Description</label>
-                  <textarea
-                    className="form-control"
-                    id="description"
-                    name="description"
-                    value={newModule.description}
-                    onChange={handleInputChange}
-                    required
-                  ></textarea>
-                </div>
-                <div className="mb-3">
-                  <label htmlFor="color" className="form-label">Color</label>
-                  <select
-                    className="form-control"
-                    id="color"
-                    name="color"
-                    value={newModule.color}
-                    onChange={handleInputChange}
-                    required
-                  >
-                    {pastelColors.map((color, index) => (
-                      <option key={index} value={color} style={{ backgroundColor: color }}>
-                        &nbsp;&nbsp;&nbsp;&nbsp;
-                      </option>
-                    ))}
-                  </select>
-                </div>
-                <button type="submit" className="btn btn-primary" data-bs-dismiss="modal">
-                  {currentModule ? 'Update Module' : 'Create Module'}
-                </button>
-              </form>
+      {isModalOpen && (
+        <div className="modal fade show d-block" id="createModuleModal" tabIndex="-1" aria-labelledby="createModuleModalLabel" aria-hidden="true" role="dialog" data-testid="modal">
+          <div className="modal-dialog">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h5 className="modal-title" id="createModuleModalLabel">{currentModule ? 'Edit Module' : 'Create New Module'}</h5>
+                <button type="button" className="btn-close" onClick={() => setIsModalOpen(false)} aria-label="Close"></button>
+              </div>
+              <div className="modal-body">
+                <form onSubmit={currentModule ? handleUpdate : handleSubmit}>
+                  <div className="mb-3">
+                    <label htmlFor="name" className="form-label">Module Name</label>
+                    <input
+                      type="text"
+                      className="form-control"
+                      id="name"
+                      name="name"
+                      value={newModule.name}
+                      onChange={handleInputChange}
+                      required
+                    />
+                  </div>
+                  <div className="mb-3">
+                    <label htmlFor="description" className="form-label">Description</label>
+                    <textarea
+                      className="form-control"
+                      id="description"
+                      name="description"
+                      value={newModule.description}
+                      onChange={handleInputChange}
+                      required
+                    ></textarea>
+                  </div>
+                  <div className="mb-3">
+                    <label htmlFor="color" className="form-label">Color</label>
+                    <select
+                      className="form-control"
+                      id="color"
+                      name="color"
+                      value={newModule.color}
+                      onChange={handleInputChange}
+                      required
+                    >
+                      {pastelColors.map((color, index) => (
+                        <option key={index} value={color} style={{ backgroundColor: color }}>
+                          &nbsp;&nbsp;&nbsp;&nbsp;
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                  <button type="submit" className="btn btn-primary">{currentModule ? 'Update Module' : 'Create Module'}</button>
+                </form>
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };
