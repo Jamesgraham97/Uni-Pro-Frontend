@@ -18,6 +18,7 @@ const Teams = () => {
   const [friends, setFriends] = useState([]);
   const [selectedUsers, setSelectedUsers] = useState([]);
   const [selectedTeam, setSelectedTeam] = useState(null);
+  const [error, setError] = useState('');
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -30,6 +31,7 @@ const Teams = () => {
         setFriends(friendsData.map(friend => ({ value: friend.id, label: friend.display_name })));
       } catch (error) {
         console.error('Error fetching teams or friends:', error);
+        setError('Failed to fetch teams');
       }
     };
 
@@ -102,26 +104,27 @@ const Teams = () => {
   }
 
   return (
-    <div className="container mt-5">
+    <div className="container mt-5" data-testid="teams-container">
       <div className="d-flex justify-content-between align-items-center mb-3">
         <h1>Teams</h1>
-        <Button variant="primary" onClick={() => handleShowModal()}>
+        <Button variant="primary" onClick={() => handleShowModal()} data-testid="add-team-button">
           Add Team
         </Button>
       </div>
+      {error && <div data-testid="error-message">{error}</div>}
       <ul className="list-group">
         {teams.map((team) => (
-          <li key={team.id} className="list-group-item d-flex flex-column">
+          <li key={team.id} className="list-group-item d-flex flex-column" data-testid={`team-${team.id}`}>
             <div className="d-flex justify-content-between align-items-center">
-              <span onClick={() => handleTeamClick(team.id)} style={{ cursor: 'pointer', flexGrow: 1 }}>
+              <span onClick={() => handleTeamClick(team.id)} style={{ cursor: 'pointer', flexGrow: 1 }} data-testid={`team-name-${team.id}`}>
                 {team.name}
               </span>
               {team.owner_id === user.user.id && (
                 <div>
-                  <Button variant="link" className="icon-button edit-button" onClick={() => handleShowModal(team)}>
+                  <Button variant="link" className="icon-button edit-button" onClick={() => handleShowModal(team)} data-testid={`edit-team-${team.id}`}>
                     <FaEdit />
                   </Button>
-                  <Button variant="link" className="icon-button delete-button" onClick={() => handleShowDeleteModal(team)}>
+                  <Button variant="link" className="icon-button delete-button" onClick={() => handleShowDeleteModal(team)} data-testid={`delete-team-${team.id}`}>
                     <MdDelete />
                   </Button>
                 </div>
@@ -143,19 +146,21 @@ const Teams = () => {
         ))}
       </ul>
 
-      <Modal show={showModal} onHide={handleCloseModal}>
+      <Modal show={showModal} onHide={handleCloseModal} data-testid="team-modal">
         <Modal.Header closeButton>
           <Modal.Title>{editMode ? 'Edit Team' : 'Create New Team'}</Modal.Title>
         </Modal.Header>
         <Form onSubmit={handleCreateOrUpdateTeam}>
           <Modal.Body>
             <Form.Group>
-              <Form.Label>Team Name</Form.Label>
+              <Form.Label htmlFor="team-name">Team Name</Form.Label>
               <Form.Control
+                id="team-name"
                 type="text"
                 value={teamName}
                 onChange={(e) => setTeamName(e.target.value)}
                 required
+                data-testid="team-name-input"
               />
             </Form.Group>
             <Form.Group>
@@ -165,6 +170,7 @@ const Teams = () => {
                 options={friends}
                 value={selectedUsers}
                 onChange={setSelectedUsers}
+                data-testid="add-users-select"
               />
             </Form.Group>
           </Modal.Body>
@@ -172,14 +178,14 @@ const Teams = () => {
             <Button variant="secondary" onClick={handleCloseModal}>
               Close
             </Button>
-            <Button variant="primary" type="submit">
+            <Button variant="primary" type="submit" data-testid="save-team-button">
               {editMode ? 'Update' : 'Create'}
             </Button>
           </Modal.Footer>
         </Form>
       </Modal>
 
-      <Modal show={showDeleteModal} onHide={handleCloseDeleteModal}>
+      <Modal show={showDeleteModal} onHide={handleCloseDeleteModal} data-testid="delete-modal">
         <Modal.Header closeButton>
           <Modal.Title>Confirm Delete</Modal.Title>
         </Modal.Header>
@@ -190,7 +196,7 @@ const Teams = () => {
           <Button variant="secondary" onClick={handleCloseDeleteModal}>
             Cancel
           </Button>
-          <Button variant="danger" onClick={handleDeleteTeam}>
+          <Button variant="danger" onClick={handleDeleteTeam} data-testid="confirm-delete-button">
             Delete
           </Button>
         </Modal.Footer>

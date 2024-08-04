@@ -136,16 +136,16 @@ const ProjectDetails = () => {
   };
 
   return (
-    <Container>
+    <Container data-testid="project-details-container">
       <h1 className="my-4">Project: {project?.name}</h1>
       <p>{project?.description}</p>
       <p>Given Date: {project?.given_date}</p>
       <p>Due Date: {project?.due_date}</p>
       <p>Grade: {project?.grade}</p>
-      <Button variant="primary" onClick={handleShowModal}>+ New Assignment</Button>
+      <Button variant="primary" onClick={handleShowModal} data-testid="new-assignment-button">+ New Assignment</Button>
 
 
-      <Modal show={showModal} onHide={handleCloseModal}>
+      <Modal show={showModal} onHide={handleCloseModal} data-testid="assignment-modal">
         <Modal.Header closeButton>
           <Modal.Title>{isEditing ? 'Edit Assignment' : 'New Assignment'}</Modal.Title>
         </Modal.Header>
@@ -159,6 +159,7 @@ const ProjectDetails = () => {
                 onChange={(e) => setTitle(e.target.value)}
                 placeholder="Title"
                 required
+                data-testid="assignment-title-input"
               />
             </Form.Group>
             <Form.Group>
@@ -169,6 +170,7 @@ const ProjectDetails = () => {
                 onChange={(e) => setDescription(e.target.value)}
                 placeholder="Description"
                 required
+                data-testid="assignment-description-input"
               />
             </Form.Group>
             <Form.Group>
@@ -178,6 +180,7 @@ const ProjectDetails = () => {
                 value={priority}
                 onChange={(e) => setPriority(e.target.value)}
                 required
+                data-testid="assignment-priority-select"
               >
                 <option value="">Select Priority</option>
                 <option value="low">Low</option>
@@ -192,6 +195,7 @@ const ProjectDetails = () => {
                 value={status}
                 onChange={(e) => setStatus(e.target.value)}
                 required
+                data-testid="assignment-status-select"
               >
                 <option value="">Select Status</option>
                 <option value="To Do">To Do</option>
@@ -199,16 +203,16 @@ const ProjectDetails = () => {
                 <option value="Done">Done</option>
               </Form.Control>
             </Form.Group>
-            <Button type="submit" variant="success" className="mt-3">
+            <Button type="submit" variant="success" className="mt-3" data-testid="assignment-submit-button">
               {isEditing ? 'Update Assignment' : 'Create Assignment'}
             </Button>
           </Form>
         </Modal.Body>
       </Modal>
 
-      <ListGroup className="mt-4">
+      <ListGroup className="mt-4" data-testid="assignments-list">
         {assignments.map((projectAssignment) => (
-          <ListGroup.Item key={projectAssignment.id} style={{ backgroundColor: getModuleColor(project?.module_id) }}>
+          <ListGroup.Item key={projectAssignment.id} style={{ backgroundColor: getModuleColor(project?.module_id) }} data-testid={`assignment-${projectAssignment.id}`}>
             <Row>
               <Col md={8}>
                 <h5>{projectAssignment.title}</h5>
@@ -231,14 +235,14 @@ const ProjectDetails = () => {
               </Col>
               <Col md={4} className="text-right">
                 {!projectAssignment.user_id && (
-                  <Button variant="link" className="icon-button" onClick={() => handleClaimProjectAssignment(projectAssignment.id)}>
+                  <Button variant="link" className="icon-button" onClick={() => handleClaimProjectAssignment(projectAssignment.id)} data-testid={`claim-assignment-${projectAssignment.id}`}>
                     <LuGrab />
                   </Button>
                 )}
-                <Button variant="link" className="icon-button edit-button" onClick={(e) => { e.stopPropagation(); handleEditClick(projectAssignment); }}>
+                <Button variant="link" className="icon-button edit-button" onClick={(e) => { e.stopPropagation(); handleEditClick(projectAssignment); }} data-testid={`edit-assignment-${projectAssignment.id}`}>
                   <FaEdit />
                 </Button>
-                <Button variant="link" className="icon-button delete-button" onClick={(e) => { e.stopPropagation(); handleDeleteProjectAssignment(projectAssignment.id); }}>
+                <Button variant="link" className="icon-button delete-button" onClick={(e) => { e.stopPropagation(); handleDeleteProjectAssignment(projectAssignment.id); }} data-testid={`delete-assignment-${projectAssignment.id}`}>
                   <MdDelete />
                 </Button>
               </Col>

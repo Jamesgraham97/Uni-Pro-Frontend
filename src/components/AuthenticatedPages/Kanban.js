@@ -179,7 +179,7 @@ const Kanban = () => {
   };
 
   return (
-    <DragDropContext onDragEnd={onDragEnd}>
+    <DragDropContext data-testid="drag-drop-context" onDragEnd={onDragEnd}>
       <Container className="kanban-container">
         {state.columnOrder.map((columnId) => {
           const column = state.columns[columnId];

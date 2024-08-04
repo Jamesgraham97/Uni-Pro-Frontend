@@ -92,13 +92,13 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="dashboard-container container mt-5 pastel-bg">
+    <div className="dashboard-container container mt-5 pastel-bg" data-testid="dashboard-container">
       <h2>Dashboard</h2>
-      <div className="modules-container">
+      <div className="modules-container" data-testid="modules-container">
         <h3>Featured Modules</h3>
         <div className="row">
           {featuredModules.map((module) => (
-            <div key={module.id} className="col-md-3 mb-4">
+            <div key={module.id} className="col-md-3 mb-4" data-testid={`module-${module.id}`}>
               <div className="card module-card" style={{ backgroundColor: module.color }}>
                 <div className="card-body">
                   <h5 className="card-title">{module.name}</h5>
@@ -109,12 +109,12 @@ const Dashboard = () => {
           ))}
         </div>
       </div>
-      <div className="assignments-calendar-container">
-        <div className="assignments-container">
+      <div className="assignments-calendar-container" data-testid="assignments-calendar-container">
+        <div className="assignments-container" data-testid="assignments-container">
           <h3>Upcoming Assignments</h3>
           <ul className="list-group">
             {assignments.map((assignment) => (
-              <li key={assignment.id} className="list-group-item d-flex justify-content-between align-items-center" style={{ borderLeft: `10px solid ${moduleColors[assignment.course_module_id]}` }}>
+              <li key={assignment.id} className="list-group-item d-flex justify-content-between align-items-center" style={{ borderLeft: `10px solid ${moduleColors[assignment.course_module_id]}` }} data-testid={`assignment-${assignment.id}`}>
                 <div>
                   <h5 className="mb-1">{assignment.title}</h5>
                   <p className="mb-1">{new Date(assignment.due_date).toLocaleDateString()}</p>
@@ -124,7 +124,7 @@ const Dashboard = () => {
             ))}
           </ul>
         </div>
-        <div className="calendar-container">
+        <div className="calendar-container" data-testid="calendar-container">
           <h3>Calendar</h3>
           <Calendar
             onChange={onDateChange}
@@ -135,11 +135,11 @@ const Dashboard = () => {
         </div>
       </div>
       {selectedAssignments.length > 0 && (
-        <div className="selected-assignments-container mt-4">
+        <div className="selected-assignments-container mt-4" data-testid="selected-assignments-container">
           <h4>Assignments due on {selectedDate}</h4>
           <ul className="list-group">
             {selectedAssignments.map((assignment) => (
-              <li key={assignment.id} className="list-group-item">
+              <li key={assignment.id} className="list-group-item" data-testid={`selected-assignment-${assignment.id}`}>
                 <div>
                   <h5 className="mb-1">{assignment.title}</h5>
                   <p className="mb-1">{new Date(assignment.due_date).toLocaleTimeString()}</p>

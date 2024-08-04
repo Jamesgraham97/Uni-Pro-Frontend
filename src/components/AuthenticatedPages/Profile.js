@@ -4,10 +4,10 @@ import CropperComponent from './CropperComponent';
 import './AuthenticatedCSS/Profile.css';
 import API_URL from '../../config/config';
 
-
 const Profile = () => {
   const [user, setUser] = useState({});
   const [formData, setFormData] = useState({
+    display_name: '',
     bio: '',
     location: '',
     profile_picture: null,
@@ -25,7 +25,7 @@ const Profile = () => {
         const response = await ApiService.getCurrentUserProfile();
         setUser(response);
         setFormData({
-          display_name:response.display_name || '',
+          display_name: response.display_name || '',
           bio: response.bio || '',
           location: response.location || '',
           profile_picture: null,
@@ -64,6 +64,7 @@ const Profile = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const data = new FormData();
+    data.append('user[display_name]', formData.display_name);
     data.append('user[bio]', formData.bio);
     data.append('user[location]', formData.location);
     if (croppedImage) {
@@ -85,18 +86,19 @@ const Profile = () => {
   };
 
   return (
-    <div className="container">
+    <div className="container" data-testid="profile-container">
       <h2>Profile</h2>
-      <form onSubmit={handleSubmit} encType="multipart/form-data">
-      <div className="mb-3">
-          <label htmlFor="displayName" className="form-label">display name</label>
-          <textarea
-            id="bio"
-            name="bio"
+      <form onSubmit={handleSubmit} encType="multipart/form-data" data-testid="profile-form">
+        <div className="mb-3">
+          <label htmlFor="displayName" className="form-label">Display Name</label>
+          <input
+            type="text"
+            id="display_name"
+            name="display_name"
             className="form-control"
-            value={formData.display_name
-            }
+            value={formData.display_name}
             onChange={handleChange}
+            data-testid="display-name-input"
           />
         </div>
         <div className="mb-3">
@@ -107,6 +109,7 @@ const Profile = () => {
             className="form-control"
             value={formData.bio}
             onChange={handleChange}
+            data-testid="bio-input"
           />
         </div>
         <div className="mb-3">
@@ -118,6 +121,7 @@ const Profile = () => {
             className="form-control"
             value={formData.location}
             onChange={handleChange}
+            data-testid="location-input"
           />
         </div>
         <div className="mb-3">
@@ -128,10 +132,11 @@ const Profile = () => {
             name="profile_picture"
             className="form-control"
             onChange={handleChange}
+            data-testid="profile-picture-input"
           />
         </div>
         {showCropper && (
-          <CropperComponent imageSrc={imageSrc} onCropComplete={handleCropComplete} />
+          <CropperComponent imageSrc={imageSrc} onCropComplete={handleCropComplete} data-testid="cropper-component" />
         )}
         <div className="mb-3">
           <label htmlFor="university" className="form-label">University</label>
@@ -142,6 +147,7 @@ const Profile = () => {
             className="form-control"
             value={formData.university}
             onChange={handleChange}
+            data-testid="university-input"
           />
         </div>
         <div className="mb-3">
@@ -153,6 +159,7 @@ const Profile = () => {
             className="form-control"
             value={formData.github}
             onChange={handleChange}
+            data-testid="github-input"
           />
         </div>
         <div className="mb-3">
@@ -164,14 +171,20 @@ const Profile = () => {
             className="form-control"
             value={formData.linkedin}
             onChange={handleChange}
+            data-testid="linkedin-input"
           />
         </div>
-        <button type="submit" className="btn btn-primary">Update Profile</button>
+        <button type="submit" className="btn btn-primary" data-testid="update-profile-button">Update Profile</button>
       </form>
       <div className="mt-4">
         <h3>Current Profile Picture</h3>
         {user.profile_picture_url && (
-          <img src={`${API_URL}${user.profile_picture_url}`} alt="Profile" className="profile-picture" />
+          <img
+            src={`${API_URL}${user.profile_picture_url}`}
+            alt="Profile"
+            className="profile-picture"
+            data-testid="current-profile-picture"
+          />
         )}
       </div>
     </div>

@@ -53,6 +53,7 @@ const Task = ({ task, index }) => (
         {...provided.dragHandleProps}
         className={snapshot.isDragging ? 'dragging' : ''}
         modulecolor={task.moduleColor || undefined}
+        data-testid={`task-${task.id}`} // Add this line
       >
         <TaskContent modulecolor={task.moduleColor}>
           <h5>{task.content}</h5>

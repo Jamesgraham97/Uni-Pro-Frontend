@@ -42,7 +42,7 @@ const Column = ({ column, tasks }) => {
   if (!column) return null;
 
   return (
-    <Container className="column-container">
+    <Container data-testid={column.id} className="column-container">
       <Title className="column-title">{column.title}</Title>
       <Droppable droppableId={column.id}>
         {(provided, snapshot) => (
